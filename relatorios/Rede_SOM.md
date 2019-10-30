@@ -51,3 +51,4 @@ pesos = som.get_weights()
 ```
 * Os resultados são obtidos através da obtenção e análise dos gráficos. Observe que, no conjunto de gráficos abaixo, aqueles que possuem um "perfil de aprovação", ou algo semelhante a isso, estão mais próximos. O mesmo se observa daqueles com "perfil de reprovação".
 
+![download](https://user-images.githubusercontent.com/55205574/67881284-99d16500-fb16-11e9-8911-416adb6b4004.png)
