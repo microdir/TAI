@@ -19,7 +19,7 @@
 
 ### Produção do Banco de Dados para o Treinamento da Rede
 	O banco de dados foi produzido em casa. Utilizamos nossos celulares para capturar, em vídeo, os gestos reais que representam as letras do alfabeto em Libras. Os vídeos foram tratados de modo a dividi-lo em 25 frames por segundo. Tendo sido gravado dois vídeos, obtemos um banco de imagens com 50 frames de cada letra.
-	O passo seguinte foi utilizar um algorítimo que encontrasse os pontos desejados e os passasse para um arquivo CSV.
+	O passo seguinte foi utilizar um algorítimo que encontrasse os pontos desejados e os passasse para um arquivo CSV. 
 
 ### Treinamento da Rede
 
