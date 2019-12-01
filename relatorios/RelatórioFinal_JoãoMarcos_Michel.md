@@ -114,6 +114,7 @@ Os resultados obtidos foram muito bons, com poucas sobreposições e podem ser a
 
 Em seguida, o arquivo com a rede já treinada foi exportado para suas devidas aplicações.
 O algorítmo responsável pelo treinamento está disponível em: https://colab.research.google.com/drive/1Zv1jMWokf_6RU1SuhRpE24h2TXh6fzw_#scrollTo=zbxtb12oRVWu.
+
 ### Experimentos e Aplicações Realizadas
 * Inicialmente, o projeto foi utilizado para controlar um sistema motorizado de pequeno porte (carrinho) com alguns gestos que consideramos ser mais bem definidos, fáceis de distinguir. Cada gesto era capaz de realizar uma ação diferente: para frente, para trás, para a direita, para a esquerda.
 
@@ -125,9 +126,9 @@ O algorítmo responsável pelo treinamento está disponível em: https://colab.r
 
 <img src='https://user-images.githubusercontent.com/55205574/69916734-7e22ec80-143d-11ea-910a-87e10345069c.jpeg' width='50%'/>
 
-## Concusão
+## Conclusão
 Durante todo o processo de desenvolvimento do projeto, os experimentos retornaram bons resultados e apresentaram respostas esperadas. Porém, alguns refinos devem ser trabalhados, pois, em alguns casos, o algorítmo confunde a letra A com a letra E por apresentarem pontos com características semelhantes.
 A proposta apresentada para a solução do problema seria adicionar uma segunda camada ao processo de reconhecimento do gesto. Essa camada seria acionada apenas quando o sistema identificasse a letra A ou a letra E, como uma espécie de "tira teima".
 
-## Referências
+## Referência
 POSNER, Erez. HandKeyPointerDetector. Disponível em <https://github.com/erezposner/HandKeyPointDetector>. Acesso em 25 de nov. de 2019.
