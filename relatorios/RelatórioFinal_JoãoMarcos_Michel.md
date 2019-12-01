@@ -19,7 +19,7 @@
 
 ### Produção do Banco de Dados para o Treinamento da Rede
    A partir das imagens selecionadas, utilizamos a biblioteca HandKeyPointerDetector para selecionar os pontos na imagem. Em seguida criamos um laço de repetição para selecionar cada imagem, obter os pontos e armazená-los em um arquivo CSV.
-```
+~~~ python
 for i in range(nPoints):
   # confidence map of corresponding body's part.
   probMap = output[0, i, :, :]
@@ -49,7 +49,7 @@ with open('keypointsRock.csv', mode='a') as employee_file:
   employee_writer.writerow(points)
 
 cv2.waitKey(0)
-```
+~~~
    Em seguida podemos ver exemplos de imagens utilizadas e os pontos encontrados pela biblioteca:
 ![letraasn](https://user-images.githubusercontent.com/55205574/69909834-d6c39c80-13df-11ea-912d-99dd09a0df44.jpeg)
 ![letraacn](https://user-images.githubusercontent.com/55205574/69909833-d6c39c80-13df-11ea-8af9-e49696f99c02.jpeg)
@@ -60,14 +60,14 @@ cv2.waitKey(0)
 
 ### Treinamento da Rede
 Os parâmetros da rede foram ajustados da seguinte forma:
-```
+~~~ python
 from minisom import MiniSom
 som = MiniSom(x = tamanhoXdaRede, y = tamanhoYdaRede, input_len = quantidadeCaracteristicas, sigma = 1.0, learning_rate = 0.6)
 som.random_weights_init(X)
 som.train_random(data = X, num_iteration = 90000)
-```
+~~~
 Como é encontrado o neurônio vencedor:
-```
+~~~ python
 # encontra o vencedor 
 x = X[1,:]
 pos = som.winner(x)
@@ -108,12 +108,12 @@ for x in X:
     MNeuronios[pos] = 4
 
   cont= cont+1
-```
+~~~
 Os resultados obtidos foram muito bons, com poucas sobreposições e podem ser analisados no gráfico a seguir:
 ![índice](https://user-images.githubusercontent.com/55205574/69915734-27afb100-1431-11ea-96aa-9862da95f035.png)
 
 Em seguida, o arquivo com a rede já treinada foi exportado para suas devidas aplicações.
-
+O algorítmo responsável pelo treinamento está disponível em: https://colab.research.google.com/drive/1Zv1jMWokf_6RU1SuhRpE24h2TXh6fzw_#scrollTo=zbxtb12oRVWu.
 ### Experimentos e Aplicações Realizadas
 * Inicialmente, o projeto foi utilizado para controlar um sistema motorizado de pequeno porte (carrinho) com alguns gestos que consideramos ser mais bem definidos, fáceis de distinguir. Cada gesto era capaz de realizar uma ação diferente: para frente, para trás, para a direita, para a esquerda.
 
@@ -121,5 +121,13 @@ Em seguida, o arquivo com a rede já treinada foi exportado para suas devidas ap
 
    * Nesse experimento, obtivemos um bom resultado quanto a resposta do sistema ao gesto que era capturado pela câmera, no entanto o processo entre a captura da imagem, reconhecimento do gesto e envio da requisição ao carrinho demorou cerca de 3 segundos. Com alguns testes observamos que essa demora se dava apenas ao processo de captura da imagem em tempo real, pois sem ele todo o processo levava menos de 1 segundo para ser concluído.
    
-* Em seguida, adaptamos o código para o processamento de gestos que representassem letras do alfabeto em LIBRAS.
+* Em seguida, adaptamos o código para o processamento de gestos que representassem letras do alfabeto em LIBRAS. Os resultados também se mostraram muito bons, com exceção das letra A e E que possuem algumas características muito próximas.
+
+<img src='https://user-images.githubusercontent.com/55205574/69916734-7e22ec80-143d-11ea-910a-87e10345069c.jpeg' width='50%'/>
+
 ## Concusão
+Durante todo o processo de desenvolvimento do projeto, os experimentos retornaram bons resultados e apresentaram respostas esperadas. Porém, alguns refinos devem ser trabalhados, pois, em alguns casos, o algorítmo confunde a letra A com a letra E por apresentarem pontos com características semelhantes.
+A proposta apresentada para a solução do problema seria adicionar uma segunda camada ao processo de reconhecimento do gesto. Essa camada seria acionada apenas quando o sistema identificasse a letra A ou a letra E, como uma espécie de "tira teima".
+
+## Referências
+POSNER, Erez. HandKeyPointerDetector. Disponível em <https://github.com/erezposner/HandKeyPointDetector>. Acesso em 25 de nov. de 2019.
