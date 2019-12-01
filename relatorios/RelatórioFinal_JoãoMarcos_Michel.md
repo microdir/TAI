@@ -56,8 +56,70 @@ cv2.waitKey(0)
 ![letraesn](https://user-images.githubusercontent.com/55205574/69909836-d6c39c80-13df-11ea-9968-dd2e16e02c01.jpeg)
 ![letraecn](https://user-images.githubusercontent.com/55205574/69909835-d6c39c80-13df-11ea-89b9-12595ac4de56.jpeg)
 
+   As saída possíveis são números que representam uma vogal: 0 para A, 1 para E, 2 para I, 3 para O e 4 para U.
+
 ### Treinamento da Rede
+Os parâmetros da rede foram ajustados da seguinte forma:
+```
+from minisom import MiniSom
+som = MiniSom(x = tamanhoXdaRede, y = tamanhoYdaRede, input_len = quantidadeCaracteristicas, sigma = 1.0, learning_rate = 0.6)
+som.random_weights_init(X)
+som.train_random(data = X, num_iteration = 90000)
+```
+Como é encontrado o neurônio vencedor:
+```
+# encontra o vencedor 
+x = X[1,:]
+pos = som.winner(x)
+print(Y_train)
+print(X.size)
+
+#matriz de zeros para decisões para cada neurônio
+MNeuronios = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+
+MContT = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+
+#matriz de zeros para contador de decisões para frente
+MContLetraA = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+#matriz de zeros para o contador de decisões para direita 
+MContLetraE = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+#matriz de zeros para o contador de decisões para esquerda 
+MContLetraI = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+MContLetraO = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+MContLetraU = np.zeros((tamanhoXdaRede,tamanhoYdaRede))
+cont = 0; 
+for x in X: 
+  pos = som.winner(x)
+  MContT[pos] += 1
+  if Y_train[cont] == 0:
+    MContLetraA[pos] += 1
+    MNeuronios[pos] = 0
+  elif Y_train[cont] == 1:
+    MContLetraE[pos] += 1
+    MNeuronios[pos] = 1
+  elif Y_train[cont] == 2:
+    MContLetraI[pos] += 1
+    MNeuronios[pos] = 2
+  elif Y_train[cont] == 3:
+    MContLetraO[pos] += 1
+    MNeuronios[pos] = 3
+  elif Y_train[cont] == 4:
+    MContLetraU[pos] += 1
+    MNeuronios[pos] = 4
+
+  cont= cont+1
+```
+Os resultados obtidos foram muito bons, com poucas sobreposições e podem ser analisados no gráfico a seguir:
+![índice](https://user-images.githubusercontent.com/55205574/69915734-27afb100-1431-11ea-96aa-9862da95f035.png)
+
+Em seguida, o arquivo com a rede já treinada foi exportado para suas devidas aplicações.
 
 ### Experimentos e Aplicações Realizadas
+* Inicialmente, o projeto foi utilizado para controlar um sistema motorizado de pequeno porte (carrinho) com alguns gestos que consideramos ser mais bem definidos, fáceis de distinguir. Cada gesto era capaz de realizar uma ação diferente: para frente, para trás, para a direita, para a esquerda.
 
+<img src='https://user-images.githubusercontent.com/55205574/69915821-0dc29e00-1432-11ea-87bf-7db66430f830.gif' width='100'/> <img src='https://user-images.githubusercontent.com/55205574/69915822-0e5b3480-1432-11ea-96a3-7f4482b9ae5b.gif' width='100'/> <img src='https://user-images.githubusercontent.com/55205574/69915974-e53ba380-1433-11ea-80b3-eab79cdff283.gif' width='100'/> <img src='https://user-images.githubusercontent.com/55205574/69915975-e53ba380-1433-11ea-9be0-d0a9d1f0ca32.gif' width='100'/>
+
+   * Nesse experimento, obtivemos um bom resultado quanto a resposta do sistema ao gesto que era capturado pela câmera, no entanto o processo entre a captura da imagem, reconhecimento do gesto e envio da requisição ao carrinho demorou cerca de 3 segundos. Com alguns testes observamos que essa demora se dava apenas ao processo de captura da imagem em tempo real, pois sem ele todo o processo levava menos de 1 segundo para ser concluído.
+   
+* Em seguida, adaptamos o código para o processamento de gestos que representassem letras do alfabeto em LIBRAS.
 ## Concusão
