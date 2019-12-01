@@ -51,7 +51,11 @@ with open('keypointsRock.csv', mode='a') as employee_file:
 cv2.waitKey(0)
 ```
    Em seguida podemos ver exemplos de imagens utilizadas e os pontos encontrados pela biblioteca:
-   <img src="https://user-images.githubusercontent.com/55205574/69909593-e17c3280-13db-11ea-8a2a-e1ec7ad88fe5.jpeg" \>
+![letraasn](https://user-images.githubusercontent.com/55205574/69909834-d6c39c80-13df-11ea-912d-99dd09a0df44.jpeg)
+![letraacn](https://user-images.githubusercontent.com/55205574/69909833-d6c39c80-13df-11ea-8af9-e49696f99c02.jpeg)
+![letraesn](https://user-images.githubusercontent.com/55205574/69909836-d6c39c80-13df-11ea-9968-dd2e16e02c01.jpeg)
+![letraecn](https://user-images.githubusercontent.com/55205574/69909835-d6c39c80-13df-11ea-89b9-12595ac4de56.jpeg)
+
 ### Treinamento da Rede
 
 ### Experimentos e Aplicações Realizadas
